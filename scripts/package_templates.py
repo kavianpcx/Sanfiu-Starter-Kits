@@ -7,6 +7,7 @@ KITS = {
     "sanfiu-market": ROOT / "templates/ecommerce/sanfiu-market",
     "sanfiu-live": ROOT / "templates/events/sanfiu-live",
     "sanfiu-marketplace": ROOT / "templates/marketplace/sanfiu-marketplace",
+    "sanfiu-academy": ROOT / "templates/education/sanfiu-academy",
 }
 EXCLUDED_PARTS = {".venv", "__pycache__", "staticfiles"}
 EXCLUDED_NAMES = {".env", "db.sqlite3"}
