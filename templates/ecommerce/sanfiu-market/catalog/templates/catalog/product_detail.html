@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} · Sanfiu Market{% endblock %}
+{% block content %}
+  <div class="wrap breadcrumb"><a href="{% url 'storefront' %}">Shop</a><span>/</span>{% if product.category %}<a href="{% url 'storefront' %}?category={{ product.category.slug }}">{{ product.category.name }}</a><span>/</span>{% endif %}<span>{{ product.name }}</span></div>
+  <section class="product-detail wrap">
+    <div class="detail-image">{% if product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}">{% else %}<span class="image-placeholder">✳</span>{% endif %}</div>
+    <div class="detail-copy">
+      <p class="eyebrow">{{ product.category.name|default:"SANFIU SELECT" }}</p>
+      <h1>{{ product.name }}</h1>
+      <p class="detail-summary">{{ product.summary }}</p>
+      <div class="detail-price"><strong>${{ product.price }}</strong>{% if product.compare_at_price %}<del>${{ product.compare_at_price }}</del><span class="save-note">A little less today</span>{% endif %}</div>
+      <p class="detail-description">{{ product.description|linebreaksbr }}</p>
+      {% if product.in_stock %}
+        <form class="add-form" method="post" action="{% url 'cart_add' product.id %}">{% csrf_token %}<label for="quantity">Qty</label><input id="quantity" name="quantity" type="number" value="1" min="1" max="{{ product.stock }}"><button class="button button-dark" type="submit">Add to bag <span>↗</span></button></form>
+        <p class="stock-note"><span class="stock-dot"></span> In stock · {{ product.stock }} ready to ship</p>
+      {% else %}<p class="out-of-stock">Currently out of stock</p>{% endif %}
+      <div class="detail-perks"><span>✳ Carefully chosen</span><span>↗ Made for everyday use</span><span>□ Simple sample checkout</span></div>
+    </div>
+  </section>
+  {% if related_products %}<section class="shop-section wrap related-section"><div class="section-heading"><div><p class="eyebrow">KEEP LOOKING</p><h2>You might like these</h2></div><a class="text-link" href="{% url 'storefront' %}#shop">Shop everything <span>↗</span></a></div><div class="product-grid">{% for item in related_products %}<article class="product-card"><a class="product-image" href="{{ item.get_absolute_url }}">{% if item.image_url %}<img loading="lazy" src="{{ item.image_url }}" alt="{{ item.name }}">{% else %}<span class="image-placeholder">✳</span>{% endif %}</a><div class="product-meta"><div><p class="product-category">{{ item.category.name|default:"Everyday" }}</p><a class="product-name" href="{{ item.get_absolute_url }}">{{ item.name }}</a></div><strong>${{ item.price }}</strong></div></article>{% endfor %}</div></section>{% endif %}
+{% endblock %}

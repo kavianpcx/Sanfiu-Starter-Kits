@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ed">
+  <meta name="description" content="Thoughtful things for everyday living.">
+  <title>{% block title %}Sanfiu Market{% endblock %}</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <div class="announcement">Thoughtful goods, shipped with care <span>✳</span> A considered edit for everyday living</div>
+  <header class="site-header">
+    <a class="wordmark" href="{% url 'storefront' %}" aria-label="Sanfiu Market home">sanfiu<span>market</span></a>
+    <form class="search" action="{% url 'storefront' %}" method="get" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+      <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Find something good" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="header-actions" aria-label="Main navigation">
+      <a href="{% url 'storefront' %}#shop">Shop</a>
+      <a class="bag-link" href="{% url 'cart' %}">Bag <span class="bag-count">{{ cart_count }}</span></a>
+    </nav>
+  </header>
+  <nav class="category-nav" aria-label="Product categories">
+    <a href="{% url 'storefront' %}">All pieces</a>
+    {% for category in nav_categories %}<a href="{% url 'storefront' %}?category={{ category.slug }}">{{ category.name }}</a>{% endfor %}
+    <a href="{% url 'storefront' %}#story">Our approach</a>
+  </nav>
+  <main>
+    {% if messages %}
+      <div class="messages wrap" aria-live="polite">
+        {% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer" id="story">
+    <div class="footer-main wrap">
+      <div><a class="wordmark footer-wordmark" href="{% url 'storefront' %}">sanfiu<span>market</span></a><p>Useful objects, chosen to make the everyday feel a little better.</p></div>
+      <div><p class="eyebrow">A good place to start</p><a href="{% url 'storefront' %}#shop">Browse the collection</a><a href="{% url 'cart' %}">Your shopping bag</a></div>
+      <div><p class="eyebrow">Questions?</p><a href="mailto:hello@example.com">hello@example.com</a><span>Replace with your support email</span></div>
+    </div>
+    <div class="footer-bottom wrap"><span>© {% now "Y" %} Sanfiu Market</span><span>Designed for everyday use.</span></div>
+  </footer>
+</body>
+</html>
