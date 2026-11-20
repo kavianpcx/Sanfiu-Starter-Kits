@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Seller application · Sanfiu Market{% endblock %}
+{% block content %}<section class="order-success wrap"><div class="success-mark">✳</div><p class="eyebrow">SELLER REVIEW</p><h1>Your shop is<br><em>in the queue.</em></h1><p class="success-copy">{{ seller.store_name }} is currently marked “{{ seller.get_review_status_display }}”. An admin needs to approve the application before products can be listed.</p><form method="post" action="{% url 'seller_logout' %}">{% csrf_token %}<button class="text-link" type="submit">Sign out</button></form></section>{% endblock %}

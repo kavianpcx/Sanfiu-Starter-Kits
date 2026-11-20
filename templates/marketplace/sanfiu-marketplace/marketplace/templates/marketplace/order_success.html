@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Order received · Sanfiu Market{% endblock %}
+{% block content %}<section class="order-success wrap"><div class="success-mark">✓</div><p class="eyebrow">ORDER SAVED</p><h1>Good find.<br><em>Good choice.</em></h1><p class="success-copy">Your order has been recorded. The store admin and each seller can review their relevant order items.</p><div class="order-receipt"><div><span>Order reference</span><strong>{{ order.public_id|truncatechars:13 }}</strong></div><div><span>Order total</span><strong>${{ order.total }}</strong></div></div><a class="button button-dark" href="{% url 'storefront' %}">Back to marketplace <span>↗</span></a></section>{% endblock %}

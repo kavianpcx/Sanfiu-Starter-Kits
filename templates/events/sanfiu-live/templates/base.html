@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182421">
+  <meta name="description" content="Find a good reason to get together.">
+  <title>{% block title %}Sanfiu Live{% endblock %}</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <div class="announcement">Make a little room for something good <span>✳</span> Discover events near you</div>
+  <header class="site-header wrap">
+    <a class="wordmark" href="{% url 'event_list' %}">sanfiu<span>live</span></a>
+    <form class="search" action="{% url 'event_list' %}" method="get" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+      <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Music, supper clubs, new ideas…" aria-label="Search events">
+      <button type="submit">Find events</button>
+    </form>
+    <a class="header-link" href="{% url 'event_list' %}#upcoming">Explore <span>↘</span></a>
+  </header>
+  <nav class="category-nav" aria-label="Event categories">
+    <a href="{% url 'event_list' %}">All events</a>
+    {% for slug, label in event_categories %}<a href="{% url 'event_list' %}?category={{ slug }}">{{ label }}</a>{% endfor %}
+    <a href="{% url 'event_list' %}#about">About Sanfiu</a>
+  </nav>
+  <main>
+    {% if messages %}<div class="messages wrap" aria-live="polite">{% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer" id="about">
+    <div class="footer-main wrap">
+      <div><a class="wordmark footer-wordmark" href="{% url 'event_list' %}">sanfiu<span>live</span></a><p>Good gatherings make a city feel a little smaller.</p></div>
+      <div><p class="eyebrow">Find your people</p><a href="{% url 'event_list' %}?category=music">Music & nightlife</a><a href="{% url 'event_list' %}?category=ideas">Talks & ideas</a><a href="{% url 'event_list' %}?category=art">Art & culture</a></div>
+      <div><p class="eyebrow">Event organizers</p><a href="mailto:events@example.com">events@example.com</a><span>Replace with your organizer contact</span></div>
+    </div>
+    <div class="footer-bottom wrap"><span>© {% now "Y" %} Sanfiu Live</span><span>Find your next reason to go out.</span></div>
+  </footer>
+</body>
+</html>
