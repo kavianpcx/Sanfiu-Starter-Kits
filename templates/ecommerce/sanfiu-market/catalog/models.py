@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MinValueValidator
 
 
 class Category(models.Model):
@@ -28,9 +29,9 @@ class Product(models.Model):
     slug = models.SlugField(max_length=160, unique=True)
     summary = models.CharField(max_length=220)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     compare_at_price = models.DecimalField(
-        max_digits=10, decimal_places=2, null=True, blank=True
+        max_digits=10, decimal_places=2, null=True, blank=True, validators=[MinValueValidator(0)]
     )
     image_url = models.URLField(max_length=500, blank=True)
     stock = models.PositiveIntegerField(default=0)

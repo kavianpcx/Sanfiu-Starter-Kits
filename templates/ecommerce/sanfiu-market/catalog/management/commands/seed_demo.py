@@ -106,11 +106,14 @@ class Command(BaseCommand):
                     else None
                 ),
                 "image_url": item["image_url"],
-                "stock": item["stock"],
                 "is_featured": item["is_featured"],
                 "is_active": True,
             }
-            Product.objects.update_or_create(
-                slug=item["slug"], defaults={"name": item["name"], **defaults}
+            product, created = Product.objects.get_or_create(
+                slug=item["slug"], defaults={"name": item["name"], "stock": item["stock"], **defaults}
             )
+            if not created:
+                for field, value in {"name": item["name"], **defaults}.items():
+                    setattr(product, field, value)
+                product.save(update_fields=["name", *defaults.keys()])
         self.stdout.write(self.style.SUCCESS("Sample products are ready."))

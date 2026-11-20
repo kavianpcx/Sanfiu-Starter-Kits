@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import migrations, models
+import django.core.validators
 import django.db.models.deletion
 
 
@@ -45,8 +46,8 @@ class Migration(migrations.Migration):
                 ("slug", models.SlugField(max_length=160, unique=True)),
                 ("summary", models.CharField(max_length=220)),
                 ("description", models.TextField(blank=True)),
-                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
-                ("compare_at_price", models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10, validators=[django.core.validators.MinValueValidator(0)])),
+                ("compare_at_price", models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True, validators=[django.core.validators.MinValueValidator(0)])),
                 ("image_url", models.URLField(blank=True, max_length=500)),
                 ("stock", models.PositiveIntegerField(default=0)),
                 ("is_featured", models.BooleanField(default=False)),

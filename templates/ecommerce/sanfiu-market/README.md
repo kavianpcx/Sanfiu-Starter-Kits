@@ -2,11 +2,13 @@
 
 A customizable full-stack starter for a small online store. It includes a responsive storefront, product catalog, session-based shopping bag, order placement, inventory tracking, sample catalog data, and Django's password-protected admin panel.
 
+[Download this kit as a ZIP](../../../downloads/sanfiu-market.zip).
+
 ## Stack
 
 - Python 3.10+
 - Django 5.2 LTS
-- SQLite for local development
+- SQLite for the quickest local start, or PostgreSQL with Docker Compose
 - Django templates and plain CSS
 
 ## Included
@@ -38,6 +40,16 @@ On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1
 
 Open `http://127.0.0.1:8000/` for the store and `http://127.0.0.1:8000/admin/` for product and order management. The admin username and password are the ones you create with `createsuperuser`.
 
+## Run with PostgreSQL
+
+After copying `.env.example` to `.env`, change `POSTGRES_PASSWORD` and start the included local containers:
+
+```bash
+docker compose up --build
+```
+
+The compose setup waits for PostgreSQL, applies migrations, and loads the sample products. In another terminal, create an admin account with `docker compose exec web python manage.py createsuperuser`. Then open `http://127.0.0.1:8000/`.
+
 ## Customize
 
 - Change the store name and page copy in `templates/`.
@@ -49,5 +61,5 @@ The demo catalog uses remote Unsplash image URLs. Replace them with images you h
 
 ## Before deploying
 
-This starter records orders but does not charge customers, send email, calculate shipping or taxes, or provide customer accounts. Add and test those services for your use case. For a real store, use PostgreSQL, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never reuse the demo secret in production.
+This starter records orders but does not charge customers, send email, calculate shipping or taxes, or provide customer accounts. Add and test those services for your use case. The included Docker Compose file is for local development, not production. For a real store, use a managed PostgreSQL service, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never reuse the demo secret or local database password in production.
 

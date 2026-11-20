@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Reservation saved · Sanfiu Live{% endblock %}
+{% block content %}
+  <section class="confirmation wrap"><div class="success-mark">✓</div><p class="eyebrow">YOU'RE ON THE LIST</p><h1>That's a good<br><em>plan.</em></h1><p class="confirmation-copy">Your reservation for {{ booking.event.title }} has been recorded. This demo does not send email or issue a scannable ticket.</p><div class="reservation-card"><div><span>Event</span><strong>{{ booking.event.title }}</strong></div><div><span>When</span><strong>{{ booking.event.starts_at|date:"D, M j · g:i A" }}</strong></div><div><span>Tickets</span><strong>{{ booking.quantity }}</strong></div><div><span>Reservation ref</span><strong>{{ booking.public_id|truncatechars:13 }}</strong></div><div class="reservation-total"><span>Recorded total</span><strong>{% if booking.total == 0 %}Free{% else %}${{ booking.total }}{% endif %}</strong></div></div><a class="button button-dark" href="{% url 'event_list' %}">Find another event <span>↗</span></a></section>
+{% endblock %}

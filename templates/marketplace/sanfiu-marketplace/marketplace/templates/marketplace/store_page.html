@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ seller.store_name }} · Sanfiu Market{% endblock %}
+{% block content %}
+  <section class="store-hero wrap"><p class="eyebrow">INDEPENDENT SHOP</p><h1>{{ seller.store_name }}</h1><p>{{ seller.description }}</p>{% if seller.website %}<a class="text-link" href="{{ seller.website }}" rel="noopener">Visit shop website ↗</a>{% endif %}</section>
+  <section class="shop-section wrap"><div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2>From {{ seller.store_name }}</h2></div><span>{{ products|length }} listings</span></div><div class="product-grid">{% for product in products %}<article class="product-card"><a class="product-image" href="{{ product.get_absolute_url }}"><img loading="lazy" src="{{ product.image_url }}" alt="{{ product.name }}"></a><div class="product-meta"><a class="product-name" href="{{ product.get_absolute_url }}">{{ product.name }}</a><strong>${{ product.price }}</strong></div><p class="product-summary">{{ product.summary }}</p></article>{% empty %}<p>This shop has no published products yet.</p>{% endfor %}</div></section>
+{% endblock %}
