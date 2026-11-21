@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17352f">
+  <meta name="description" content="Build a learning habit, one useful lesson at a time.">
+  <title>{% block title %}Sanfiu Academy · Learn something useful{% endblock %}</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <div class="topline"><span>LEARNING THAT FITS YOUR DAY</span><span>Small steps. Useful skills. Your pace.</span></div>
+  <header class="site-header wrap">
+    <a class="brand" href="{% url 'course_list' %}"><span class="brand-mark">s</span><span>sanfiu<span class="brand-light">academy</span></span></a>
+    <form class="search" action="{% url 'course_list' %}" method="get" role="search"><span aria-hidden="true">⌕</span><input type="search" name="q" value="{{ query|default:'' }}" placeholder="What would you like to learn?" aria-label="Search courses"><button type="submit">Search</button></form>
+    <nav class="account-nav" aria-label="Account">{% if user.is_authenticated %}<a href="{% url 'dashboard' %}">My learning</a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Sign out</button></form>{% else %}<a href="{% url 'login' %}">Sign in</a><a class="nav-join" href="{% url 'signup' %}">Join free</a>{% endif %}</nav>
+  </header>
+  <nav class="category-nav wrap" aria-label="Course categories"><a href="{% url 'course_list' %}" class="{% if not selected_category %}nav-current{% endif %}">All courses</a>{% for slug,label in course_categories %}<a href="{% url 'course_list' %}?category={{ slug }}" class="{% if selected_category == slug %}nav-current{% endif %}">{{ label }}</a>{% endfor %}</nav>
+  <main>
+    {% if messages %}<div class="messages wrap" aria-live="polite">{% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer"><div class="footer-main wrap"><div><a class="brand footer-brand" href="{% url 'course_list' %}"><span class="brand-mark">s</span><span>sanfiu<span class="brand-light">academy</span></span></a><p>Build a skill you can use, one focused lesson at a time.</p></div><div><p class="footer-label">Explore</p><a href="{% url 'course_list' %}?category=design">Design</a><a href="{% url 'course_list' %}?category=technology">Technology</a><a href="{% url 'course_list' %}?category=business">Business</a></div><div><p class="footer-label">For your school</p><a href="/admin/">Manage courses</a><span>Replace with your learning team contact</span></div></div><div class="footer-bottom wrap"><span>© {% now "Y" %} Sanfiu Academy</span><span>Learn at your own pace.</span></div></footer>
+</body>
+</html>

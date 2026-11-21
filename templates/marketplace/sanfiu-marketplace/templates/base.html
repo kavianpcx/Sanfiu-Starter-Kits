@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#212a37">
+  <meta name="description" content="Good finds from independent shops.">
+  <title>{% block title %}Sanfiu Marketplaces{% endblock %}</title>
+  <link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <div class="announcement">Shop small. Find something great. <span>✳</span> Meet the makers behind the goods.</div>
+  <header class="site-header wrap">
+    <a class="wordmark" href="{% url 'storefront' %}">sanfiu<span>market</span></a>
+    <form class="search" action="{% url 'storefront' %}" method="get" role="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg><input type="search" name="q" value="{{ query|default:'' }}" placeholder="Search products and shops" aria-label="Search products and shops"><button type="submit">Search</button></form>
+    <nav class="header-actions" aria-label="Main navigation"><a href="{% url 'seller_apply' %}">Sell with us</a><a class="bag-link" href="{% url 'cart' %}">Bag <span>{{ cart_count }}</span></a></nav>
+  </header>
+  <nav class="category-nav" aria-label="Product categories"><a href="{% url 'storefront' %}">All finds</a>{% for category in nav_categories %}<a href="{% url 'storefront' %}?category={{ category.slug }}">{{ category.name }}</a>{% endfor %}<a href="{% url 'seller_apply' %}">Open a shop ↗</a></nav>
+  <main>{% if messages %}<div class="messages wrap" aria-live="polite">{% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><div class="footer-main wrap"><div><a class="wordmark footer-wordmark" href="{% url 'storefront' %}">sanfiu<span>market</span></a><p>A shared shelf for independent shops and thoughtful goods.</p></div><div><p class="eyebrow">For shoppers</p><a href="{% url 'storefront' %}">Browse all finds</a><a href="{% url 'cart' %}">Your shopping bag</a></div><div><p class="eyebrow">For sellers</p><a href="{% url 'seller_apply' %}">Apply to open a shop</a><a href="{% url 'seller_login' %}">Seller sign in</a></div></div><div class="footer-bottom wrap"><span>© {% now "Y" %} Sanfiu Market</span><span>Replace the brand, colors, and catalog.</span></div></footer>
+</body>
+</html>

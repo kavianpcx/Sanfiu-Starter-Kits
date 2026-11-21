@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Order received · Sanfiu Market{% endblock %}
+{% block content %}
+  <section class="order-success wrap"><div class="success-mark">✓</div><p class="eyebrow">THANK YOU, {{ order.full_name|upper }}</p><h1>Your order is<br><em>in good hands.</em></h1><p class="success-copy">We've saved your order and the team will take it from here. This demo does not send email or process a payment.</p><div class="order-receipt"><div><span>Order number</span><strong>{{ order.public_id|truncatechars:13 }}</strong></div><div><span>Total</span><strong>${{ order.total }}</strong></div><div><span>Status</span><strong>{{ order.get_status_display }}</strong></div></div><a class="button button-dark" href="{% url 'storefront' %}">Back to the shop <span>↗</span></a></section>
+{% endblock %}

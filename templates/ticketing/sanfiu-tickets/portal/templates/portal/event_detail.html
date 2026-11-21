@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} · Sanfiu Tickets{% endblock %}
+{% block content %}
+<div class="breadcrumb wrap"><a href="{% url 'event_list' %}">Tickets</a><span>/</span>{{ event.get_category_display }}</div>
+<section class="show-detail wrap">
+  <div class="detail-poster"><img src="{{ event.image_url }}" alt="{{ event.title }} poster"><span>{{ event.get_category_display|upper }}</span></div>
+  <div class="show-detail-copy">
+    <p class="eyebrow">{{ event.city }} · {{ event.venue }}</p>
+    <h1>{{ event.title }}</h1>
+    <p class="show-lead">{{ event.summary }}</p>
+    <p class="show-description">{{ event.description }}</p>
+    <div class="show-facts"><div><small>DATE & TIME</small><strong>{{ event.starts_at|date:"l, F j · g:i A" }}</strong></div><div><small>VENUE</small><strong>{{ event.venue }}</strong></div><div><small>LOCATION</small><strong>{{ event.city }}</strong></div></div>
+  </div>
+</section>
+<section class="offers-section wrap">
+  <div class="section-head"><div><p class="eyebrow">AVAILABLE TICKET OFFERS</p><h2>Choose an option.</h2></div><span class="section-caption">{{ listings|length }} available offers</span></div>
+  {% for listing in listings %}
+    <article class="offer-card">
+      <div class="offer-mark">{% if event.category == "movies" %}▣{% else %}✳{% endif %}</div>
+      <div class="offer-description"><span>{{ listing.get_section_display }}</span><h3>{{ listing.details|default:"General admission" }}</h3><p>Listed by {{ listing.seller.display_name }} · {{ listing.quantity_available }} available</p></div>
+      <div class="offer-buy"><strong>${{ listing.price }} <small>/ ticket</small></strong><form method="post" action="{% url 'buy_ticket' listing.pk %}">{% csrf_token %}<label class="sr-only" for="qty-{{ listing.pk }}">Ticket quantity</label><input id="qty-{{ listing.pk }}" name="{{ listing.pk }}-quantity" type="number" min="1" max="8" value="1" required><input class="buyer-input" name="{{ listing.pk }}-buyer_name" placeholder="Full name" maxlength="120" aria-label="Full name" required><input class="buyer-input" name="{{ listing.pk }}-buyer_email" type="email" placeholder="Email address" aria-label="Email address" required><button type="submit">Reserve tickets <span>→</span></button></form></div>
+    </article>
+  {% empty %}<div class="empty"><p>No ticket offers are available for this show yet.</p></div>{% endfor %}
+  <p class="fine-print">A reservation is stored in this demo. No payment is taken and no scannable ticket is issued.</p>
+</section>
+{% endblock %}
