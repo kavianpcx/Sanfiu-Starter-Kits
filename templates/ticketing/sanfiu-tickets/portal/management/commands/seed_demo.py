@@ -113,6 +113,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         user_model = get_user_model()
+        Event.objects.filter(
+            slug__in=(
+                "after-hours-jazz-session",
+                "nycfc-vs-austin",
+                "the-long-way-home",
+            )
+        ).update(is_published=False)
         sellers = {}
         for item in SHOWS:
             if item["seller"] not in sellers:

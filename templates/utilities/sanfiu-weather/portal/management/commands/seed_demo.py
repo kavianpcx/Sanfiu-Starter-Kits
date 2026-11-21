@@ -50,6 +50,7 @@ class Command(BaseCommand):
             for key in ("current_temp", "high", "low", "wind_kph"):
                 data[key] = Decimal(str(data[key]))
             city, _ = WeatherCity.objects.update_or_create(slug=item["slug"], defaults=data)
+            HourlyForecast.objects.filter(city=city).delete()
 
             for offset, (condition, high, low, rain) in enumerate(item["days"]):
                 DailyForecast.objects.update_or_create(
@@ -64,15 +65,13 @@ class Command(BaseCommand):
                 )
 
             for offset, (condition, temp_delta, rain, wind) in enumerate(item["hours"]):
-                HourlyForecast.objects.update_or_create(
+                HourlyForecast.objects.create(
                     city=city,
                     forecast_at=first_hour + timedelta(hours=offset * 3),
-                    defaults={
-                        "condition": condition,
-                        "temperature": Decimal(str(item["current_temp"])) + Decimal(str(temp_delta)),
-                        "precipitation_percent": rain,
-                        "wind_kph": Decimal(str(wind)),
-                    },
+                    condition=condition,
+                    temperature=Decimal(str(item["current_temp"])) + Decimal(str(temp_delta)),
+                    precipitation_percent=rain,
+                    wind_kph=Decimal(str(wind)),
                 )
 
         self.stdout.write(self.style.SUCCESS("Sample hourly and 10-day forecasts are ready. They are not live weather data."))
