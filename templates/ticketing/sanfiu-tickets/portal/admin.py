@@ -26,7 +26,7 @@ class TicketListingAdmin(admin.ModelAdmin):
 class TicketOrderItemInline(admin.TabularInline): model=TicketOrderItem; extra=0; readonly_fields=("listing","quantity","unit_price")
 @admin.register(TicketOrder)
 class TicketOrderAdmin(admin.ModelAdmin):
- list_display=("public_id","buyer_name","buyer_email","total","status","created_at")
+ list_display=("public_id","buyer_name","buyer_email","buyer","total","status","created_at")
  list_filter=("status","created_at")
  search_fields=("public_id","buyer_name","buyer_email")
  readonly_fields=("public_id","buyer_name","buyer_email","total","created_at")

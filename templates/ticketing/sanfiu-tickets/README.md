@@ -10,6 +10,7 @@ A cinema and attraction ticket-marketplace starter with movie discovery, dated s
 - Search and category filters for movies, water parks, attractions, and other tickets
 - Screening and venue detail pages with seller offers and available quantities
 - Seller signup, admin approval, listing review, and seller dashboard
+- Buyer signup, a separate buyer sign-in, prefilled booking details, and a reservation history for bookings made while signed in
 - A reservation flow that checks and decrements available inventory
 - Repeatable sample sessions and ticket offers via `seed_demo`
 
@@ -28,10 +29,10 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/` to browse sample tickets, `/sell/apply/` to create a seller account, and `/admin/` to manage shows and approvals. New sellers need admin approval before their offers can be published.
+Open `http://127.0.0.1:8000/` to browse sample tickets, `/accounts/buyer-signup/` to create a ticket-holder account, `/sell/apply/` to create a seller account, and `/admin/` to manage shows and approvals. Sign in before a reservation to save it to `/account/tickets/`; guest checkout remains available. New sellers need admin approval before their offers can be published.
 
 For local PostgreSQL, change the password in `.env`, then run `docker compose up --build`. Use `docker compose exec web python manage.py seed_demo` and `docker compose exec web python manage.py createsuperuser` to load demo records and make an admin.
 
 ## Before deployment
 
-The reservation flow updates sample inventory but is not a paid booking system. It does not charge buyers, issue or transfer scannable tickets, assign specific cinema seats, verify seller identity, send email, or handle refunds and disputes. Add a payment provider, real seat or capacity inventory, seller verification, and ticket validation before production. All show and water-park records are fictional samples. Remote photos have terms separate from the MIT software license.
+The reservation flow updates sample inventory but is not a paid booking system. It does not charge buyers, issue or transfer scannable tickets, assign specific cinema seats, verify seller identity, send email, or handle refunds and disputes. Guest reservations cannot be attached to an account later. Add a payment provider, real seat or capacity inventory, seller verification, and ticket validation before production. All show and water-park records are fictional samples. Remote photos have terms separate from the MIT software license.

@@ -7,10 +7,24 @@ class SellerSignupForm(UserCreationForm):
     email=forms.EmailField(label="Email address")
     display_name=forms.CharField(max_length=120,label="Shop name")
     class Meta: model=User; fields=("username","email","password1","password2")
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields["display_name"]=forms.CharField(max_length=120,label="Shop name")
     def save(self,commit=True):
         user=super().save(commit=False); user.email=self.cleaned_data["email"]
         if commit: user.save(); SellerProfile.objects.create(user=user,display_name=self.cleaned_data["display_name"])
         return user
+
+class TicketBuyerSignupForm(UserCreationForm):
+    email=forms.EmailField(label="Email address")
+    class Meta: model=User; fields=("username","email","password1","password2")
+    def save(self,commit=True):
+        user=super().save(commit=False); user.email=self.cleaned_data["email"]
+        if commit: user.save()
+        return user
+
+class SellerApplicationForm(forms.Form):
+    display_name=forms.CharField(max_length=120,label="Shop name")
 
 class TicketListingForm(forms.ModelForm):
     class Meta:

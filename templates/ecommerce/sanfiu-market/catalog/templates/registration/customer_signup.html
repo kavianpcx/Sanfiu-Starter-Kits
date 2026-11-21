@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Create your account · Sanfiu Market{% endblock %}
+{% block content %}
+<section class="auth-page wrap">
+  <div class="auth-art"><p class="eyebrow">YOUR OWN LITTLE CORNER</p><h1>Save the good<br><em>stuff for later.</em></h1><p>Create an account to keep your order history in one place.</p><div class="auth-art-stamp">SHOP<br>THOUGHTFULLY <b>✳</b></div></div>
+  <div class="auth-panel"><p class="eyebrow">JOIN SANFIU MARKET</p><h2>Create an account</h2><p class="auth-intro">It only takes a minute.</p>
+    <form method="post">{% csrf_token %}{% for field in form %}<div class="auth-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<small>{{ field.help_text|safe }}</small>{% endif %}{% for error in field.errors %}<small class="auth-error">{{ error }}</small>{% endfor %}</div>{% endfor %}{% if form.non_field_errors %}<div class="auth-error">{{ form.non_field_errors }}</div>{% endif %}<button class="button button-dark button-full" type="submit">Create account <span>↗</span></button></form>
+    <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+  </div>
+</section>
+{% endblock %}

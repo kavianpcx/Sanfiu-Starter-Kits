@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
 from django.db.models import Q
@@ -7,7 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from .cart import cart_details
-from .forms import CheckoutForm
+from .forms import CheckoutForm, CustomerSignupForm
 from .models import Category, Order, OrderItem, Product
 
 
@@ -97,7 +99,10 @@ def checkout(request):
         messages.info(request, "Add an item to your bag before checkout.")
         return redirect("storefront")
 
-    form = CheckoutForm(data=request.POST if request.method == "POST" else None)
+    initial = None
+    if request.user.is_authenticated and request.method != "POST":
+        initial = {"full_name": request.user.get_full_name() or request.user.username, "email": request.user.email}
+    form = CheckoutForm(data=request.POST if request.method == "POST" else None, initial=initial)
     if request.method == "POST" and form.is_valid():
         cart_data = request.session.get("cart", {})
         requested = {}
@@ -134,7 +139,7 @@ def checkout(request):
                  for product_id, quantity in requested.items()),
                 Decimal("0.00"),
             )
-            order = Order.objects.create(total=total, **form.cleaned_data)
+            order = Order.objects.create(total=total, user=request.user if request.user.is_authenticated else None, **form.cleaned_data)
             for product_id, quantity in requested.items():
                 product = products[product_id]
                 OrderItem.objects.create(
@@ -161,3 +166,20 @@ def checkout(request):
 def order_success(request, public_id):
     order = get_object_or_404(Order, public_id=public_id)
     return render(request, "catalog/order_success.html", {"order": order})
+
+
+def customer_signup(request):
+    if request.user.is_authenticated:
+        return redirect("customer_account")
+    form = CustomerSignupForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect("customer_account")
+    return render(request, "registration/customer_signup.html", {"form": form})
+
+
+@login_required
+def customer_account(request):
+    orders = request.user.market_orders.prefetch_related("items").all()
+    return render(request, "catalog/account.html", {"orders": orders})

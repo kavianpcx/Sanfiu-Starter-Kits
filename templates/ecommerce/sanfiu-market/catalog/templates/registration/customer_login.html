@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Sign in · Sanfiu Market{% endblock %}
+{% block content %}
+<section class="auth-page wrap">
+  <div class="auth-art"><p class="eyebrow">A LITTLE MORE PERSONAL</p><h1>Good finds,<br><em>kept together.</em></h1><p>Sign in to see your past orders and keep your next checkout simple.</p><div class="auth-art-stamp">MADE FOR<br>EVERYDAY <b>✳</b></div></div>
+  <div class="auth-panel"><p class="eyebrow">WELCOME BACK</p><h2>Sign in to your account</h2><p class="auth-intro">Pick up where you left off.</p>
+    {% if form.errors %}<div class="auth-error" role="alert">That username and password combination wasn't recognized.</div>{% endif %}
+    <form method="post">{% csrf_token %}<input type="hidden" name="next" value="{{ next }}"><label for="id_username">Username</label><input id="id_username" name="username" autocomplete="username" required autofocus><label for="id_password">Password</label><input id="id_password" name="password" type="password" autocomplete="current-password" required><button class="button button-dark button-full" type="submit">Sign in <span>↗</span></button></form>
+    <p class="auth-switch">New here? <a href="{% url 'customer_signup' %}">Create an account</a></p>
+  </div>
+</section>
+{% endblock %}

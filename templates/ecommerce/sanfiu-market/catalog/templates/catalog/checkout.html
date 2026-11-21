@@ -3,6 +3,7 @@
 {% block content %}
   <section class="page-section wrap">
     <div class="page-heading"><p class="eyebrow">ALMOST YOURS</p><h1>Checkout</h1><p>Your details are only used to process this sample order.</p></div>
+    {% if not user.is_authenticated %}<p class="account-prompt"><a href="{% url 'login' %}?next={% url 'checkout' %}">Sign in</a> to save this order to your account, or continue as a guest.</p>{% endif %}
     <div class="checkout-layout">
       <form class="checkout-form" method="post">{% csrf_token %}
         {% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}

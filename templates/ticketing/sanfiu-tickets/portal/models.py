@@ -46,6 +46,7 @@ class TicketListing(models.Model):
 class TicketOrder(models.Model):
     STATUS_CHOICES=[("reserved","Reserved"),("cancelled","Cancelled")]
     public_id=models.UUIDField(default=uuid.uuid4,unique=True,editable=False)
+    buyer=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,related_name="ticket_orders",null=True,blank=True)
     buyer_name=models.CharField(max_length=120)
     buyer_email=models.EmailField()
     total=models.DecimalField(max_digits=9,decimal_places=2,default=0)

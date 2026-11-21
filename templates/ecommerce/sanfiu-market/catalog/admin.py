@@ -28,7 +28,7 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("public_id", "full_name", "email", "total", "status", "created_at")
+    list_display = ("public_id", "full_name", "email", "user", "total", "status", "created_at")
     list_filter = ("status", "created_at")
     search_fields = ("public_id", "full_name", "email", "phone")
     readonly_fields = ("public_id", "total", "created_at")

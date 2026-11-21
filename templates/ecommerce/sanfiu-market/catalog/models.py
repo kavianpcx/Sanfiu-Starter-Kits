@@ -1,4 +1,5 @@
 import uuid
+from django.conf import settings
 
 from django.db import models
 from django.urls import reverse
@@ -62,6 +63,7 @@ class Order(models.Model):
         CANCELLED = "cancelled", "Cancelled"
 
     public_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name="market_orders", null=True, blank=True)
     full_name = models.CharField(max_length=120)
     email = models.EmailField()
     phone = models.CharField(max_length=32)

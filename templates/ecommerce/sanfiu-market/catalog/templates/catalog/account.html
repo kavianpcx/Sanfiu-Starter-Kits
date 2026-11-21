@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Your account · Sanfiu Market{% endblock %}
+{% block content %}
+<section class="account-page wrap">
+  <p class="eyebrow">YOUR SANFIU ACCOUNT</p>
+  <div class="account-heading"><div><h1>Hello, {{ user.first_name|default:user.username }}.</h1><p>{{ user.email }}</p></div><a class="button button-dark" href="{% url 'storefront' %}#shop">Keep shopping <span>↗</span></a></div>
+  <div class="account-section-heading"><h2>Order history</h2><span>{{ orders|length }} order{{ orders|length|pluralize }}</span></div>
+  {% if orders %}<div class="order-history">{% for order in orders %}<article class="history-card"><div class="history-top"><div><span>ORDER PLACED</span><strong>{{ order.created_at|date:"M j, Y" }}</strong></div><div><span>STATUS</span><strong>{{ order.get_status_display }}</strong></div><div><span>TOTAL</span><strong>${{ order.total }}</strong></div><div><span>REFERENCE</span><strong>{{ order.public_id|truncatechars:13 }}</strong></div></div><ul>{% for item in order.items.all %}<li>{{ item.product_name }} <span>× {{ item.quantity }}</span></li>{% endfor %}</ul></article>{% endfor %}</div>
+  {% else %}<div class="account-empty"><span>✳</span><h3>Your first order will show up here.</h3><p>Browse the collection to find something useful.</p><a href="{% url 'storefront' %}#shop">Explore products ↗</a></div>{% endif %}
+</section>
+{% endblock %}

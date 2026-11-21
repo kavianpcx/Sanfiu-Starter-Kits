@@ -18,6 +18,7 @@ A customizable full-stack starter for a small online store. It includes a respon
 - Shopping bag stored in the visitor's session
 - Server-validated checkout that records an order and reduces stock
 - Admin pages for products, categories, and order status
+- Customer signup, sign-in, account order history, and guest checkout
 - Six sample products with editable names, prices, copy, and image URLs
 - Local migrations and a repeatable demo-data command
 
@@ -38,7 +39,7 @@ python manage.py runserver
 
 On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1`. Copy `.env.example` to `.env` in PowerShell with `Copy-Item .env.example .env`.
 
-Open `http://127.0.0.1:8000/` for the store and `http://127.0.0.1:8000/admin/` for product and order management. The admin username and password are the ones you create with `createsuperuser`.
+Open `http://127.0.0.1:8000/` for the store, `/accounts/signup/` to create a customer account, `/account/` for order history, and `http://127.0.0.1:8000/admin/` for product and order management. Customer orders placed while signed in appear in the account; guest checkout remains available. The admin username and password are the ones you create with `createsuperuser`.
 
 ## Run with PostgreSQL
 
@@ -61,6 +62,6 @@ The demo catalog uses remote Unsplash image URLs. Replace them with images you h
 
 ## Before deploying
 
-This starter records orders but does not charge customers, send email, calculate shipping or taxes, or provide customer accounts. Add and test those services for your use case. The included Docker Compose file is for local development, not production. For a real store, use a managed PostgreSQL service, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never reuse the demo secret or local database password in production.
+This starter records orders but does not charge customers, send email, or calculate shipping or taxes. Customer accounts use Django's built-in session authentication. Add a payment service, email delivery, and region-specific shipping and tax rules for your use case. The included Docker Compose file is for local development, not production. For a real store, use a managed PostgreSQL service, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never reuse the demo secret or local database password in production.
 
 The software in this kit is MIT licensed. Sample photographs and remote services have separate terms.
