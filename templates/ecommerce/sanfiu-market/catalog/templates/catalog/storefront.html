@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{% if query %}{{ query }} · {% endif %}Sanfiu Market{% endblock %}
+{% block content %}
+  {% if not query and featured_product %}
+  <section class="market-hero wrap">
+    <div class="market-hero-copy">
+      <p class="market-kicker"><span></span> THE WEEKLY DROP</p>
+      <h1>Good finds.<br><em>Better prices.</em></h1>
+      <p>Discover useful things for work, home, and everything in between.</p>
+      <a class="market-primary" href="#shop">Shop best sellers <b>→</b></a>
+      <div class="market-hero-foot"><span>01</span><i></i><span>Fresh picks added every week</span></div>
+    </div>
+    <a class="market-hero-product" href="{{ featured_product.get_absolute_url }}">
+      <span class="market-deal">TODAY'S PICK</span>
+      {% if featured_product.image_url %}<img src="{{ featured_product.image_url }}" alt="{{ featured_product.name }}">{% else %}<span class="market-product-placeholder">S</span>{% endif %}
+      <span class="market-hero-product-caption"><span>{{ featured_product.category.name|default:"Featured" }}</span><strong>{{ featured_product.name }}</strong><b>${{ featured_product.price }} <i>View item →</i></b></span>
+    </a>
+  </section>
+  {% endif %}
+
+  <section class="market-benefits wrap" aria-label="Store information">
+    <div><b>↗</b><span><strong>Quick checkout</strong><small>A simple, clear order flow</small></span></div>
+    <div><b>□</b><span><strong>Curated catalog</strong><small>Easy to update in your admin</small></span></div>
+    <div><b>⌂</b><span><strong>Stock aware</strong><small>Inventory updates with orders</small></span></div>
+    <a href="#shop">Browse all departments <b>→</b></a>
+  </section>
+
+  <section class="shop-section wrap" id="shop">
+    <div class="section-heading">
+      <div><p class="market-kicker">{% if query %}SEARCH{% else %}SHOP THE CATALOG{% endif %}</p><h2>{% if query %}Results for “{{ query }}”{% else %}Popular right now{% endif %}</h2></div>
+      <p>Browse the demo catalog, then make it your own.</p>
+    </div>
+    <div class="category-chips">
+      <a class="chip {% if not selected_category %}chip-active{% endif %}" href="{% url 'storefront' %}{% if query %}?q={{ query|urlencode }}{% endif %}">All departments</a>
+      {% for category in categories %}<a class="chip {% if selected_category == category.slug %}chip-active{% endif %}" href="?category={{ category.slug }}{% if query %}&q={{ query|urlencode }}{% endif %}">{{ category.name }}</a>{% endfor %}
+    </div>
+    {% if products %}
+      <div class="product-grid">
+        {% for product in products %}
+          <article class="product-card">
+            <a class="product-image" href="{{ product.get_absolute_url }}">
+              {% if product.image_url %}<img loading="lazy" src="{{ product.image_url }}" alt="{{ product.name }}">{% else %}<span class="image-placeholder">S</span>{% endif %}
+              {% if product.compare_at_price %}<span class="product-badge">Special price</span>{% elif product.is_featured %}<span class="product-badge">Popular</span>{% endif %}
+              <span class="quick-view">See details <span>→</span></span>
+            </a>
+            <div class="product-meta"><div><p class="product-category">{{ product.category.name|default:"General" }}</p><a class="product-name" href="{{ product.get_absolute_url }}">{{ product.name }}</a></div><div class="product-price"><strong>${{ product.price }}</strong>{% if product.compare_at_price %}<del>${{ product.compare_at_price }}</del>{% endif %}</div></div>
+            <p class="product-summary">{% if product.stock %}<span class="market-stock-dot"></span> In stock · {{ product.stock }} available{% else %}<span class="market-sold-out">Out of stock</span>{% endif %}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-results"><span>⌕</span><h3>No products found</h3><p>Try another search or browse all departments.</p><a class="button button-dark" href="{% url 'storefront' %}">See all products</a></div>
+    {% endif %}
+  </section>
+  <section class="market-note wrap"><div class="market-note-mark">S</div><div><p class="market-kicker">MADE FOR YOUR NEXT STORE</p><h2>Change the products.<br>Keep the storefront.</h2></div><p>Manage products, categories, and orders in Django admin. Replace the sample catalog and brand assets with your own.</p></section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Shop useful picks for work, home, and everyday life.">
+  <title>{% block title %}Sanfiu Market{% endblock %}</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <div class="market-announcement">A fresh edit for the week <span>·</span> Find something useful today</div>
+  <header class="site-header">
+    <a class="wordmark" href="{% url 'storefront' %}" aria-label="Sanfiu Market home">sanfiu<span>market</span></a>
+    <form class="search" action="{% url 'storefront' %}" method="get" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+      <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Search products and categories" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+    <nav class="header-actions" aria-label="Main navigation">
+      <a href="{% url 'storefront' %}#shop">Explore</a>
+      <a class="bag-link" href="{% url 'cart' %}">Bag <span class="bag-count">{{ cart_count }}</span></a>
+    </nav>
+  </header>
+  <nav class="category-nav" aria-label="Product categories">
+    <a class="all-departments" href="{% url 'storefront' %}">☰ &nbsp; Departments</a>
+    {% for category in nav_categories %}<a href="{% url 'storefront' %}?category={{ category.slug }}">{{ category.name }}</a>{% endfor %}
+    <a href="{% url 'storefront' %}#story">About this kit</a>
+  </nav>
+  <main>
+    {% if messages %}<div class="messages wrap" aria-live="polite">{% for message in messages %}<div class="message message-{{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer" id="story">
+    <div class="footer-main wrap">
+      <div><a class="wordmark footer-wordmark" href="{% url 'storefront' %}">sanfiu<span>market</span></a><p>A full-stack store starter with a catalog, shopping bag, checkout, inventory, and admin.</p></div>
+      <div><p class="eyebrow">Shop</p><a href="{% url 'storefront' %}#shop">Browse products</a><a href="{% url 'cart' %}">Your shopping bag</a></div>
+      <div><p class="eyebrow">Store settings</p><a href="/admin/">Open admin</a><span>Replace the sample store details before launch.</span></div>
+    </div>
+    <div class="footer-bottom wrap"><span>© {% now "Y" %} Sanfiu Market</span><span>Demo checkout records orders; it does not charge cards.</span></div>
+  </footer>
+</body>
+</html>

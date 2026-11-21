@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Movies and tickets · Sanfiu Tickets{% endblock %}
+{% block content %}
+<section class="ticket-hero wrap">
+  <div class="ticket-hero-copy">
+    <p class="eyebrow"><span class="eyebrow-light"></span> THE NIGHT STARTS HERE</p>
+    <h1>Pick a film.<br><em>Make a night of it.</em></h1>
+    <p>Find cinema sessions and water-park passes, compare available ticket offers, then reserve a place.</p>
+    <a class="ticket-hero-button" href="#shows">Browse showtimes <span>↓</span></a>
+    <div class="ticket-steps"><span>01 &nbsp; Choose a show</span><i></i><span>02 &nbsp; Compare offers</span><i></i><span>03 &nbsp; Reserve</span></div>
+  </div>
+  {% if featured_event %}
+  <a class="featured-show" href="{{ featured_event.get_absolute_url }}">
+    <img src="{{ featured_event.image_url }}" alt="Cinema atmosphere for {{ featured_event.title }}">
+    <span class="featured-show-shade"></span>
+    <span class="featured-show-tag">FEATURED SCREENING</span>
+    <span class="featured-show-caption"><small>{{ featured_event.get_category_display|upper }} · {{ featured_event.city }}</small><strong>{{ featured_event.title }}</strong><b>{{ featured_event.starts_at|date:"D · M j · g:i A" }} &nbsp; ↗</b></span>
+    <span class="reel-stamp">NOW<br>SHOWING</span>
+  </a>
+  {% endif %}
+</section>
+
+<section class="ticket-trust wrap"><div><b>01</b><span><strong>Real inventory logic</strong><small>Reservations reduce the available count.</small></span></div><div><b>02</b><span><strong>Approved sellers</strong><small>Admin-reviewed listings appear to buyers.</small></span></div><div><b>03</b><span><strong>One clear flow</strong><small>Choose a show and reserve tickets.</small></span></div></section>
+
+<section class="wrap shows-section" id="shows">
+  <div class="section-head"><div><p class="eyebrow">ON THE BIG SCREEN & OUTDOORS</p><h2>Find your next outing.</h2></div><span class="section-caption">Sample sessions · Prices in USD</span></div>
+  <div class="ticket-filters"><a href="{% url 'event_list' %}" class="{% if not selected_category %}active{% endif %}">All tickets</a>{% for slug,label in event_categories %}<a class="{% if selected_category == slug %}active{% endif %}" href="?category={{ slug }}{% if query %}&q={{ query|urlencode }}{% endif %}">{{ label }}</a>{% endfor %}</div>
+  {% if events %}
+    <div class="show-grid">
+    {% for event in events %}
+      <article class="show-card">
+        <a class="show-poster" href="{{ event.get_absolute_url }}"><img loading="lazy" src="{{ event.image_url }}" alt="{{ event.title }} poster"><span class="poster-shade"></span><span class="poster-category">{{ event.get_category_display }}</span><span class="poster-date"><b>{{ event.starts_at|date:"d" }}</b>{{ event.starts_at|date:"M"|upper }}</span><span class="poster-arrow">↗</span></a>
+        <div class="show-card-copy"><p>{{ event.venue }} · {{ event.city }}</p><a class="show-title" href="{{ event.get_absolute_url }}">{{ event.title }}</a><div class="show-card-bottom"><span>{{ event.starts_at|date:"D, M j · g:i A" }}</span><strong>{% if event.lowest_price %}From ${{ event.lowest_price }}{% else %}No offers yet{% endif %}</strong></div></div>
+      </article>
+    {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty"><h3>No tickets match that search.</h3><p>Try another title, city, or category.</p><a href="{% url 'event_list' %}">Show all tickets ↗</a></div>
+  {% endif %}
+</section>
+<section class="ticket-note wrap"><span class="ticket-note-icon">i</span><div><strong>Sample ticket marketplace</strong><p>Reservations reduce demo inventory, but do not collect payment or issue an entry ticket.</p></div><a href="{% url 'seller_signup' %}">Become a seller ↗</a></section>
+{% endblock %}
