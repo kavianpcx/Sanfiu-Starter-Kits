@@ -1,30 +1,46 @@
 # Sanfiu Starter Kits
 
-Reusable website starters with a real backend, database, and clear setup instructions. Each kit lives in its own folder and is designed to be rebranded and extended.
+A growing collection of independent, full-stack website starters. Pick a project, download its ZIP, change the brand and content, then run it locally. Every kit has its own frontend, backend, database models, sample data, admin workflow, and setup guide.
 
-## Kits
+**Open source:** [MIT licensed](LICENSE). Sample photos and third-party services have their own terms; see each kit README.
 
-| Kit | Type | Stack | Status | Download |
-|---|---|---|---|---|
-| [Sanfiu Market](templates/ecommerce/sanfiu-market/) | Online store | Django, SQLite/PostgreSQL, HTML, CSS | Preview | [ZIP](downloads/sanfiu-market.zip) |
-| [Sanfiu Live](templates/events/sanfiu-live/) | Event discovery and booking | Django, SQLite/PostgreSQL, HTML, CSS | Preview | [ZIP](downloads/sanfiu-live.zip) |
-| [Sanfiu Marketplace](templates/marketplace/sanfiu-marketplace/) | Multi-seller marketplace | Django, SQLite/PostgreSQL, HTML, CSS | Preview | [ZIP](downloads/sanfiu-marketplace.zip) |
-| [Sanfiu Academy](templates/education/sanfiu-academy/) | Online learning | Django, SQLite/PostgreSQL, HTML, CSS | Preview | [ZIP](downloads/sanfiu-academy.zip) |
+## Project gallery
 
-Open a kit's README for features, local setup, sample data, and deployment notes. The source is organized by kit so it can be copied into a separate project or downloaded with the repository.
+Click a preview image or the ZIP link directly below it to download that starter. Use the source link for its setup instructions and code.
 
-## Project goals
+<table>
+<tr><td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-market.zip"><img src="previews/sanfiu-market.svg" alt="Preview of Sanfiu Market" width="100%"></a><br><strong>Sanfiu Market</strong> · Storefront<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-market.zip">Download ZIP ↘</a> · <a href="templates/ecommerce/sanfiu-market/">Source & setup</a></td>
+<td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-live.zip"><img src="previews/sanfiu-live.svg" alt="Preview of Sanfiu Live" width="100%"></a><br><strong>Sanfiu Live</strong> · Events<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-live.zip">Download ZIP ↘</a> · <a href="templates/events/sanfiu-live/">Source & setup</a></td></tr>
+<tr><td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-marketplace.zip"><img src="previews/sanfiu-marketplace.svg" alt="Preview of Sanfiu Marketplace" width="100%"></a><br><strong>Sanfiu Marketplace</strong> · Marketplace<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-marketplace.zip">Download ZIP ↘</a> · <a href="templates/marketplace/sanfiu-marketplace/">Source & setup</a></td>
+<td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-academy.zip"><img src="previews/sanfiu-academy.svg" alt="Preview of Sanfiu Academy" width="100%"></a><br><strong>Sanfiu Academy</strong> · Learning<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-academy.zip">Download ZIP ↘</a> · <a href="templates/education/sanfiu-academy/">Source & setup</a></td></tr>
+<tr><td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-tickets.zip"><img src="previews/sanfiu-tickets.svg" alt="Preview of Sanfiu Tickets" width="100%"></a><br><strong>Sanfiu Tickets</strong> · Tickets<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-tickets.zip">Download ZIP ↘</a> · <a href="templates/ticketing/sanfiu-tickets/">Source & setup</a></td>
+<td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-devices.zip"><img src="previews/sanfiu-devices.svg" alt="Preview of Sanfiu Devices" width="100%"></a><br><strong>Sanfiu Devices</strong> · Devices<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-devices.zip">Download ZIP ↘</a> · <a href="templates/showcase/sanfiu-devices/">Source & setup</a></td></tr>
+<tr><td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-weather.zip"><img src="previews/sanfiu-weather.svg" alt="Preview of Sanfiu Weather" width="100%"></a><br><strong>Sanfiu Weather</strong> · Weather<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-weather.zip">Download ZIP ↘</a> · <a href="templates/utilities/sanfiu-weather/">Source & setup</a></td>
+<td width="50%" valign="top"><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-world-clock.zip"><img src="previews/sanfiu-world-clock.svg" alt="Preview of Sanfiu World Clock" width="100%"></a><br><strong>Sanfiu World Clock</strong> · Time zones<br><a href="https://raw.githubusercontent.com/kavianpcx/Sanfiu-Starter-Kits/feat/first-store-template/downloads/sanfiu-world-clock.zip">Download ZIP ↘</a> · <a href="templates/utilities/sanfiu-world-clock/">Source & setup</a></td></tr>
+</table>
 
-- Complete, working front ends and back ends, not static mockups.
-- Local database setup and realistic sample content.
-- Simple rebranding through editable text, colors, and images.
-- An index here that links to every kit and its setup guide.
+## Quick start
 
-## Contributing a kit
+1. Choose a kit above and download its ZIP, or open its source folder.
+2. Follow that kit's README to install dependencies and create its local database.
+3. Replace the sample name, colors, images, and content.
+4. Review the deployment notes before putting a site online.
 
-Add each new starter under `templates/<category>/<kit-name>/` and include a dedicated README with its stack, configuration, database setup, local run commands, and deployment requirements.
+Most kits use Django 5.2, SQLite for local development, and PostgreSQL through Docker Compose. Each folder is a separate project and can be deployed independently.
 
-The current examples cover product sales, capacity-limited event reservations, multi-seller commerce, and online learning. Additional kits should live in separate folders and include their own backend, data model, admin workflow, sample content, and setup guide.
+## Included templates
 
-See the [roadmap](ROADMAP.md) for the next planned starter types. Regenerate individual source archives with `python scripts/package_templates.py` after changing a kit.
+- **Sanfiu Market:** storefront, cart, inventory, orders, and admin.
+- **Sanfiu Live:** event discovery and capacity-limited reservations.
+- **Sanfiu Marketplace:** seller onboarding, moderated products, and seller-specific order workflows.
+- **Sanfiu Academy:** courses, learner accounts, enrollments, lessons, and progress tracking.
+- **Sanfiu Tickets:** event listings, seller ticket offers, admin moderation, and quantity-limited reservations.
+- **Sanfiu Devices:** original product showcase, specifications, and inquiry management.
+- **Sanfiu Weather:** sample city conditions and daily forecast records, with a documented provider integration point.
+- **Sanfiu World Clock:** live local clocks and browser-side time-zone conversion.
 
+These are preview starters, not turnkey production services. Payment processing, private media, email delivery, fraud checks, and jurisdiction-specific requirements need to be configured for the chosen business.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the structure and documentation each new kit should include. See [ROADMAP.md](ROADMAP.md) for future starter ideas. Regenerate downloads with `python scripts/package_templates.py`.

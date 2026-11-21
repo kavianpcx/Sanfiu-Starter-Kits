@@ -1,19 +1,22 @@
-# Sanfiu Starter Kits roadmap
+# Roadmap
 
-The repository is a growing set of independent full-stack starters. A row moves to the README index when its source and setup guide are in the repository.
+Each project in this repository is a separate full-stack starter with its own setup guide and ZIP download.
 
 ## In the repository
 
 - **Sanfiu Market:** product catalog, cart, inventory, orders, and admin.
-- **Sanfiu Live:** event discovery, reservation capacity, bookings, and admin.
-- **Sanfiu Marketplace:** seller applications and review, seller-managed listings, marketplace orders, and seller fulfillment status.
-- **Sanfiu Academy:** course catalog, learner accounts, enrollments, lessons, and progress tracking.
+- **Sanfiu Live:** event discovery, reservations, and capacity management.
+- **Sanfiu Marketplace:** seller review, moderated listings, multi-seller orders, and fulfillment status.
+- **Sanfiu Academy:** course catalog, enrollments, lessons, and learner progress.
+- **Sanfiu Tickets:** seller ticket offers, admin review, and unpaid ticket reservations.
+- **Sanfiu Devices:** product showcase, specifications, and inquiry capture.
+- **Sanfiu Weather:** editable sample city conditions and daily forecasts.
+- **Sanfiu World Clock:** IANA time-zone locations, live clocks, and a time converter.
 
-## Next kits
+## Future ideas
 
-- **Device showcase:** campaign pages, product comparisons, specifications, and inquiry capture.
-- **File hub:** upload and download flows, file metadata, user permissions, and storage configuration.
-- **Streaming catalog:** media discovery, watchlists, access rules, and a pluggable video-storage provider.
-- **Public service portal:** service directory, accessible forms, request tracking, and staff workflows.
+- Private file hub with managed object storage and role-based access.
+- Streaming catalog with private video delivery and watchlists.
+- Public service portal with accessible forms and request tracking.
 
-Payment processing, identity checks, private media storage, and government integrations depend on the deployer's provider and jurisdiction. Each starter should expose those integrations as documented setup points rather than claiming that production credentials are included.
+Integrations that affect money, identity, private files, or public services need to be configured for the deployer's chosen providers and jurisdiction.

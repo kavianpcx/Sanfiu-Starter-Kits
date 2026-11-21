@@ -2,7 +2,7 @@
 
 A customizable full-stack starter for a small online store. It includes a responsive storefront, product catalog, session-based shopping bag, order placement, inventory tracking, sample catalog data, and Django's password-protected admin panel.
 
-[Download this kit as a ZIP](../../../downloads/sanfiu-market.zip).
+![Sanfiu Market UI preview](preview.svg)
 
 ## Stack
 
@@ -63,3 +63,4 @@ The demo catalog uses remote Unsplash image URLs. Replace them with images you h
 
 This starter records orders but does not charge customers, send email, calculate shipping or taxes, or provide customer accounts. Add and test those services for your use case. The included Docker Compose file is for local development, not production. For a real store, use a managed PostgreSQL service, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never reuse the demo secret or local database password in production.
 
+The software in this kit is MIT licensed. Sample photographs and remote services have separate terms.

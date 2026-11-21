@@ -2,7 +2,7 @@
 
 A customizable event discovery and ticket reservation starter. It includes a responsive event guide, category and text search, event detail pages, capacity-limited reservations, sample events, and a password-protected admin panel.
 
-[Download this kit as a ZIP](../../../downloads/sanfiu-live.zip).
+![Sanfiu Live UI preview](preview.svg)
 
 ## Stack
 
@@ -44,3 +44,5 @@ The sample listings use remote Unsplash image URLs. Replace them with images you
 ## Before deploying
 
 This starter records reservations and prevents the published ticket capacity from being exceeded. It does not take payment, email attendees, issue scannable tickets, or handle cancellations and refunds. Docker Compose is for local development. For a real event business, use PostgreSQL, configure email and payment providers, define cancellation rules, set a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0`, configure `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, and review Django's deployment checklist. Never use the sample secrets in production.
+
+The software in this kit is MIT licensed. Sample photographs and remote services have separate terms.

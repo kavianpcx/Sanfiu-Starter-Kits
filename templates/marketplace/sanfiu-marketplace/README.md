@@ -1,6 +1,6 @@
 # Sanfiu Marketplace
 
-[Download this kit as a ZIP](../../../downloads/sanfiu-marketplace.zip).
+![Sanfiu Marketplace UI preview](preview.svg)
 
 A multi-seller storefront with a seller application flow, admin review, seller-only product management, and per-item order fulfillment status. The admin panel is the marketplace operator's control center.
 
@@ -43,3 +43,5 @@ For local PostgreSQL with Docker Compose, set a local password in `.env` and run
 ## Before deploying
 
 This starter records orders and inventory but does not process payment, calculate shipping or tax, issue refunds, send email, or pay out sellers. Seller order views expose the recipient's name, phone, and delivery address only for that seller's ordered products. Configure privacy notices, data retention, payment, shipping, and payout services for your business and jurisdiction. Docker Compose is for local development, not production. For a real marketplace, use PostgreSQL, a private `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0`, correct allowed hosts, HTTPS static hosting, rate limits for seller signup and login, and Django's deployment checklist. Never use the sample secrets in production.
+
+The software in this kit is MIT licensed. Sample photographs and remote services have separate terms.

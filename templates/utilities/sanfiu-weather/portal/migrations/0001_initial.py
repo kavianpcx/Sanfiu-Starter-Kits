@@ -1,0 +1,10 @@
+from django.db import migrations,models
+import django.core.validators
+import django.db.models.deletion
+class Migration(migrations.Migration):
+ initial=True
+ dependencies=[]
+ operations=[
+ migrations.CreateModel(name="WeatherCity",fields=[("id",models.BigAutoField(auto_created=True,primary_key=True,serialize=False,verbose_name="ID")),("name",models.CharField(max_length=100)),("region",models.CharField(blank=True,max_length=100)),("slug",models.SlugField(max_length=120,unique=True)),("current_temp",models.DecimalField(decimal_places=1,max_digits=5)),("condition",models.CharField(max_length=80)),("high",models.DecimalField(decimal_places=1,max_digits=5)),("low",models.DecimalField(decimal_places=1,max_digits=5)),("humidity",models.PositiveSmallIntegerField(default=50,validators=[django.core.validators.MinValueValidator(0),django.core.validators.MaxValueValidator(100)])),("wind_kph",models.DecimalField(decimal_places=1,default=0,max_digits=5)),("image_url",models.URLField(blank=True,max_length=500)),("updated_at",models.DateTimeField(auto_now=True)),("is_featured",models.BooleanField(default=False)),("is_published",models.BooleanField(default=True))],options={"ordering":["-is_featured","name"]}),
+ migrations.CreateModel(name="DailyForecast",fields=[("id",models.BigAutoField(auto_created=True,primary_key=True,serialize=False,verbose_name="ID")),("forecast_date",models.DateField()),("condition",models.CharField(max_length=80)),("high",models.DecimalField(decimal_places=1,max_digits=5)),("low",models.DecimalField(decimal_places=1,max_digits=5)),("precipitation_percent",models.PositiveSmallIntegerField(default=0,validators=[django.core.validators.MinValueValidator(0),django.core.validators.MaxValueValidator(100)])),("city",models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,related_name="forecasts",to="portal.weathercity"))],options={"ordering":["forecast_date"]}),
+ migrations.AddConstraint(model_name="dailyforecast",constraint=models.UniqueConstraint(fields=("city","forecast_date"),name="unique_weather_city_date"))]

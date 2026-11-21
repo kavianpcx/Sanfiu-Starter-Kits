@@ -1,12 +1,14 @@
 # Adding a starter kit
 
-Each kit must be usable on its own. Keep it inside `templates/<category>/<kit-name>/` with its own dependency list, configuration example, database migrations, sample-data command, admin workflow, and setup guide.
+Keep each project independent under `templates/<category>/<kit-name>/`. Include its own dependency list, environment example, migrations, sample-data command, admin workflow, English UI copy, and setup guide.
 
 ## Before opening a pull request
 
-- Explain what the starter does and list any missing integrations.
-- Include local setup instructions that begin from a clean checkout.
-- Keep credentials, customer data, local databases, and generated secrets out of Git.
-- Use original names, copy, layouts, and assets. References can inform common workflows, but do not reuse a site's logo, source code, or proprietary imagery.
-- Document what must change before production, including storage, payment, email, deployment, and security settings.
-- Regenerate the individual ZIP in `downloads/` with `python scripts/package_templates.py` after changing kit files.
+- Add a preview image under `previews/` and make its README gallery image link directly to that kit's ZIP in `downloads/`.
+- Add the kit to the root README gallery and to `scripts/package_templates.py`.
+- Explain features, setup, sample credentials if any, and missing integrations.
+- Keep secrets, customer data, local databases, and generated credentials out of Git.
+- Use original names, copy, layouts, and assets. Do not reuse another site's logo, source code, or proprietary imagery.
+- Document production changes, including storage, payments, email, security, and deployment.
+- State that remote sample photos and third-party services are not covered by this repository's MIT license.
+- Regenerate ZIP archives with `python scripts/package_templates.py`.

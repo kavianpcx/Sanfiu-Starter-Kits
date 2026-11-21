@@ -1,0 +1,8 @@
+from django import forms
+from .models import Inquiry
+
+class InquiryForm(forms.ModelForm):
+ class Meta:
+  model=Inquiry
+  fields=("name","email","phone","message")
+  widgets={"message":forms.Textarea(attrs={"rows":4,"placeholder":"What would you like to know?"})}

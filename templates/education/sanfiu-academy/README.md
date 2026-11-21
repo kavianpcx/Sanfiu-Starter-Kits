@@ -2,7 +2,7 @@
 
 A customizable online learning starter with a course catalog, student accounts, enrollment, lesson pages, progress tracking, sample content, and an admin panel.
 
-[Download this kit as a ZIP](../../../downloads/sanfiu-academy.zip).
+![Sanfiu Academy UI preview](preview.svg)
 
 ## Stack
 
@@ -49,3 +49,5 @@ To use PostgreSQL in Docker, set a local password in `.env`, then run `docker co
 ## Before deploying
 
 This starter handles free enrollment and lesson progress. It does not include paid course checkout, video hosting or access control, certificates, email notifications, or instructor payouts. The optional video link opens externally and is not protected. Docker Compose is for local development. Before deployment, use PostgreSQL, configure a private `DJANGO_SECRET_KEY`, set `DJANGO_DEBUG=0` and `DJANGO_ALLOWED_HOSTS`, serve static files over HTTPS, configure backups and email, and review Django's deployment checklist. Never use the sample values in production.
+
+The software in this kit is MIT licensed. Sample photographs and remote services have separate terms.

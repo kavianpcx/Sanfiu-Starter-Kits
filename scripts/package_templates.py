@@ -8,6 +8,10 @@ KITS = {
     "sanfiu-live": ROOT / "templates/events/sanfiu-live",
     "sanfiu-marketplace": ROOT / "templates/marketplace/sanfiu-marketplace",
     "sanfiu-academy": ROOT / "templates/education/sanfiu-academy",
+    "sanfiu-tickets": ROOT / "templates/ticketing/sanfiu-tickets",
+    "sanfiu-devices": ROOT / "templates/showcase/sanfiu-devices",
+    "sanfiu-weather": ROOT / "templates/utilities/sanfiu-weather",
+    "sanfiu-world-clock": ROOT / "templates/utilities/sanfiu-world-clock",
 }
 EXCLUDED_PARTS = {".venv", "__pycache__", "staticfiles"}
 EXCLUDED_NAMES = {".env", "db.sqlite3"}
